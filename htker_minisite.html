@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTKER</title>
+    <link rel="icon" type="image/png" href="ht.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        @font-face {
+            font-family: 'Brushstrike';
+            src: url('brushstrike.ttf');
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: #f5f0e8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            position: relative;
+            overflow: auto;
+        }
+        
+        .blob1 {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #1a1f5e;
+            border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+            opacity: 0.07;
+            top: -120px;
+            right: -100px;
+            pointer-events: none;
+            transition: all 2s ease-in-out;
+        }
+        
+        .blob2 {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: #b8b4aa;
+            border-radius: 40% 60% 50% 50% / 55% 45% 55% 45%;
+            opacity: 0.18;
+            bottom: -80px;
+            left: -60px;
+            pointer-events: none;
+            transition: all 2s ease-in-out;
+        }
+        
+        .arc {
+            position: fixed;
+            top: 0;
+            right: -60px;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0.55;
+            pointer-events: none;
+        }
+        
+        .card {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 380px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+        
+        .card.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+        
+        .logo-badge {
+            display: inline-block;
+            background: #1a1f5e;
+            padding: 10px 32px 8px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.8rem;
+            color: #f5f0e8;
+            letter-spacing: 6px;
+        }
+        
+        .logo-image {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px;
+            transition: transform 0.1s ease-out;
+        }
+        
+        .name {
+            font-family: 'Brushstrike', cursive;
+            font-size: 1.7rem;
+            color: #1a1f5e;
+            letter-spacing: 5px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .subtitle {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #b8b4aa;
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
+        }
+        
+        .services {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+        }
+        
+        .tag {
+            background: #1a1f5e;
+            color: #f5f0e8;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            padding: 4px 14px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+        
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: #1a1f5e;
+            margin: 0 auto 1.8rem;
+            opacity: 0.25;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 13px 18px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: transform 0.13s, box-shadow 0.13s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn:active {
+            transform: scale(0.97);
+        }
+        
+        .btn-tg {
+            background: #1a1f5e;
+            color: #f5f0e8;
+        }
+        
+        .btn-tg:hover {
+            background: #252c80;
+            box-shadow: 0 4px 18px rgba(26, 31, 94, 0.18);
+        }
+        
+        .btn-wa {
+            background: #0d0d0d;
+            color: #f5f0e8;
+        }
+        
+        .btn-wa:hover {
+            background: #222;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+        }
+        
+        .btn-mail {
+            background: #f5f0e8;
+            color: #1a1f5e;
+            border: 1.5px solid #1a1f5e;
+        }
+        
+        .btn-mail:hover {
+            background: #eae4d6;
+            box-shadow: 0 4px 18px rgba(26, 31, 94, 0.1);
+        }
+        
+        .btn-portfolio {
+            background: #f5f0e8;
+            color: #b8b4aa;
+            border: 1.5px solid #d0ccc4;
+            cursor: not-allowed;
+        }
+        
+        .btn-icon {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-label {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .arrow {
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+        
+        .soon {
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            border: 1px solid #d0ccc4;
+            border-radius: 2px;
+            padding: 2px 8px;
+            text-transform: uppercase;
+            color: #b8b4aa;
+        }
+        
+        .handle {
+            margin-top: 1.8rem;
+            color: #b8b4aa;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+        
+        @media (max-height: 600px) {
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    <div class="arc"></div>
+
+    <div class="card">
+
+        <div class="header">
+            <img src="ht.png" alt="HTKER" class="logo-image">
+            <span class="name">Hotor Kodjo Evenunye</span>
+            <div class="subtitle">Marketing · Logistique · Support Digital</div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="buttons">
+
+            <a class="btn btn-tg" href="https://t.me/mhtker" target="_blank">
+                <div class="btn-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z" fill="#f5f0e8" opacity=".15"/>
+            <path d="M17.588 7.27L15.54 17.02c-.15.67-.54.83-1.09.52l-3-2.21-1.45 1.4c-.16.16-.3.3-.61.3l.22-3.07 5.6-5.06c.24-.22-.05-.34-.38-.12L6.97 13.59l-2.96-.92c-.64-.2-.66-.64.14-.95l11.55-4.45c.53-.19 1 .13.83.95z" fill="#f5f0e8"/>
+          </svg>
+                </div>
+                <span class="btn-label">Telegram</span>
+                <span class="arrow">→</span>
+            </a>
+
+
+
+            <a class="btn btn-wa" href="https://wa.me/22870042709" target="_blank">
+                <div class="btn-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.52 3.66 1.42 5.18L2 22l4.95-1.38A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill="#f5f0e8" opacity=".15"/>
+            <path d="M17.01 14.56c-.28-.14-1.67-.82-1.93-.91-.26-.1-.44-.14-.63.14-.19.28-.73.91-.9 1.1-.16.19-.33.21-.61.07-.28-.14-1.18-.44-2.24-1.39-.83-.74-1.39-1.66-1.55-1.94-.16-.28-.02-.43.12-.57.13-.13.28-.33.42-.5.14-.17.19-.28.28-.47.1-.19.05-.36-.02-.5-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.47-.63-.48-.16-.01-.35-.01-.54-.01-.19 0-.5.07-.76.36-.26.28-1 1-1 2.42s1.02 2.81 1.17 3c.14.19 2.01 3.07 4.87 4.31.68.29 1.21.47 1.62.6.68.22 1.3.18 1.79.11.55-.08 1.67-.68 1.9-1.34.24-.66.24-1.22.17-1.34-.07-.12-.26-.19-.54-.33z" fill="#f5f0e8"/>
+          </svg>
+                </div>
+                <span class="btn-label">WhatsApp</span>
+                <span class="arrow">→</span>
+            </a>
+
+            <a class="btn btn-mail" href="mailto:hhtkerrobert@gmail.com">
+                <div class="btn-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="2" y="4" width="20" height="16" rx="2" stroke="#1a1f5e" stroke-width="1.5"/>
+            <path d="M2 7l10 7 10-7" stroke="#1a1f5e" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+                </div>
+                <span class="btn-label">Email</span>
+                <span class="arrow" style="color:#1a1f5e;">→</span>
+            </a>
+
+            <div class="btn btn-portfolio">
+                <div class="btn-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <rect x="3" y="7" width="18" height="14" rx="2" stroke="#b8b4aa" stroke-width="1.5"/>
+            <path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2" stroke="#b8b4aa" stroke-width="1.5"/>
+          </svg>
+                </div>
+                <span class="btn-label">Portfolio</span>
+                <span class="soon">bientôt</span>
+            </div>
+
+        </div>
+
+        <div class="handle">@mhtker</div>
+
+    </div>
+
+    <script>
+        window.addEventListener('load', () => {
+            document.querySelector('.card').classList.add('show');
+        });
+
+        setInterval(() => {
+            const blob1 = document.querySelector('.blob1');
+            blob1.style.top = (Math.random() * 200 - 120) + 'px';
+            blob1.style.right = (Math.random() * 200 - 100) + 'px';
+
+            const blob2 = document.querySelector('.blob2');
+            blob2.style.bottom = (Math.random() * 200 - 80) + 'px';
+            blob2.style.left = (Math.random() * 200 - 60) + 'px';
+        }, 5000);
+
+        const logo = document.querySelector('.logo-image');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX - window.innerWidth / 2) * 0.05;
+            const y = (e.clientY - window.innerHeight / 2) * 0.05;
+            logo.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    </script>
+
+</body>
+
+</html>
