@@ -1,0 +1,261 @@
+        @font-face {
+            font-family: 'Brushstrike';
+            src: url('brushstrike.ttf');
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            background: #f5f0e8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            position: relative;
+            overflow: auto;
+        }
+        
+        .blob1 {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: #1a1f5e;
+            border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+            opacity: 0.07;
+            top: -120px;
+            right: -100px;
+            pointer-events: none;
+            transition: all 2s ease-in-out;
+        }
+        
+        .blob2 {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: #b8b4aa;
+            border-radius: 40% 60% 50% 50% / 55% 45% 55% 45%;
+            opacity: 0.18;
+            bottom: -80px;
+            left: -60px;
+            pointer-events: none;
+            transition: all 2s ease-in-out;
+        }
+        
+        .arc {
+            position: fixed;
+            top: 0;
+            right: -60px;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: #fff;
+            opacity: 0.55;
+            pointer-events: none;
+        }
+        
+        .card {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 380px;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease-out;
+        }
+        
+        .card.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 1.6rem;
+        }
+        
+        .logo-badge {
+            display: inline-block;
+            background: #1a1f5e;
+            padding: 10px 32px 8px;
+            border-radius: 3px;
+            margin-bottom: 10px;
+        }
+        
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.8rem;
+            color: #f5f0e8;
+            letter-spacing: 6px;
+        }
+        
+        .logo-image {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto 10px;
+            transition: transform 0.1s ease-out;
+        }
+        
+        .name {
+            font-family: 'Brushstrike', cursive;
+            font-size: 1.7rem;
+            color: #1a1f5e;
+            letter-spacing: 5px;
+            display: block;
+            margin-bottom: 2px;
+        }
+        
+        .subtitle {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #b8b4aa;
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
+        }
+        
+        .services {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+        }
+        
+        .tag {
+            background: #1a1f5e;
+            color: #f5f0e8;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            padding: 4px 14px;
+            border-radius: 2px;
+            text-transform: uppercase;
+        }
+        
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: #1a1f5e;
+            margin: 0 auto 1.8rem;
+            opacity: 0.25;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 13px 18px;
+            border-radius: 3px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: transform 0.13s, box-shadow 0.13s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn:active {
+            transform: scale(0.97);
+        }
+        
+        .btn-tg {
+            background: #1a1f5e;
+            color: #f5f0e8;
+        }
+        
+        .btn-tg:hover {
+            background: #252c80;
+            box-shadow: 0 4px 18px rgba(26, 31, 94, 0.18);
+        }
+        
+        .btn-wa {
+            background: #0d0d0d;
+            color: #f5f0e8;
+        }
+        
+        .btn-wa:hover {
+            background: #222;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+        }
+        
+        .btn-mail {
+            background: #f5f0e8;
+            color: #1a1f5e;
+            border: 1.5px solid #1a1f5e;
+        }
+        
+        .btn-mail:hover {
+            background: #eae4d6;
+            box-shadow: 0 4px 18px rgba(26, 31, 94, 0.1);
+        }
+        
+        .btn-portfolio {
+            background: #f5f0e8;
+            color: #b8b4aa;
+            border: 1.5px solid #d0ccc4;
+            cursor: not-allowed;
+        }
+        
+        .btn-icon {
+            width: 26px;
+            height: 26px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-label {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .arrow {
+            opacity: 0.5;
+            font-size: 0.9rem;
+        }
+        
+        .soon {
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            border: 1px solid #d0ccc4;
+            border-radius: 2px;
+            padding: 2px 8px;
+            text-transform: uppercase;
+            color: #b8b4aa;
+        }
+        
+        .handle {
+            margin-top: 1.8rem;
+            color: #b8b4aa;
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+        }
+        
+        @media (max-height: 600px) {
+            body {
+                padding: 1rem;
+            }
+        }
