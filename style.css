@@ -217,6 +217,16 @@
             cursor: not-allowed;
         }
         
+        .btn-social {
+            background: #1a1f5e;
+            color: #f5f0e8;
+        }
+        
+        .btn-social:hover {
+            background: #252c80;
+            box-shadow: 0 4px 18px rgba(26, 31, 94, 0.18);
+        }
+        
         .btn-icon {
             width: 26px;
             height: 26px;
@@ -252,6 +262,51 @@
             font-size: 0.9rem;
             letter-spacing: 3px;
             font-weight: 600;
+        }
+        
+        .social-categories {
+            width: 100%;
+        }
+        
+        .category {
+            margin-bottom: 1rem;
+        }
+        
+        .category summary {
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1a1f5e;
+            padding: 10px 0;
+            list-style: none;
+            position: relative;
+            border-bottom: 1px solid #d0ccc4;
+            transition: border-color 0.2s;
+        }
+        
+        .category summary:hover {
+            border-bottom-color: #1a1f5e;
+        }
+        
+        .category summary::marker {
+            display: none;
+        }
+        
+        .category summary::after {
+            content: '▼';
+            position: absolute;
+            right: 0;
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+        
+        .category[open] summary::after {
+            transform: rotate(180deg);
+        }
+        
+        .category .buttons {
+            margin-top: 0.5rem;
         }
         
         @media (max-height: 600px) {
